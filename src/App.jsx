@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-import desktopHeader from "../public/assets/bg-header-desktop.svg";
-import mobileHeader from "../public/assets/bg-header-mobile.svg";
+import desktopHeader from "./assets/bg-header-desktop.svg";
+import mobileHeader from "./assets/bg-header-mobile.svg";
 
 import styled from 'styled-components';
+
+import picture from "./assets/account.svg"
 
 
 import data from "./data/data.json"
@@ -16,7 +18,7 @@ const MOCK_DATA =
   {
     "id": 1,
     "company": "Photosnap",
-    "logo": "../public/assets/photosnap.svg",
+    "logo": "/src/assets/photosnap.svg",
     "new": true,
     "featured": true,
     "position": "Senior Frontend Developer",
@@ -31,7 +33,7 @@ const MOCK_DATA =
   {
     "id": 2,
     "company": "Manage",
-    "logo": "../public/assets/manage.svg",
+    "logo": "/src/assets/manage.svg",
     "new": true,
     "featured": true,
     "position": "Fullstack Developer",
@@ -46,7 +48,7 @@ const MOCK_DATA =
   {
     "id": 3,
     "company": "Account",
-    "logo": "../public/assets/account.svg",
+    "logo": "/src/assets/account.svg",
     "new": true,
     "featured": false,
     "position": "Junior Frontend Developer",
@@ -89,7 +91,6 @@ const JobTab = ({jobData}) => {
   const new_key = jobData.new;
   const {id,company,logo,featured,position,role,level,postedAt,contract,location,languages,tools} = jobData;
   
-  let image = require(logo);
 
 
   const JobInterface = styled.div`
@@ -100,24 +101,26 @@ const JobTab = ({jobData}) => {
     padding: 1.5rem;
   `
 
-  const jobInfo = styled.div`
+  const JobInfo = styled.div`
     display:grid;
     grid-template-areas:
     "image company-name job-status"
     "image position-name ."
-    "image job-details ."
+    "image job-details .";
+    grid-template-columns: repeat(3,1fr)
+    grid-template-rows:auto
   `
 
-  const positionImage = styled.img`
+  const PositionImage = styled.div`
     grid-area: image;
     
   `
 
   return(
       <JobInterface>
-        <jobInfo>
-          <positionImage src = {require(image).default} alt={company} />        
-        </jobInfo>
+        <JobInfo>
+          <PositionImage as="img" src={logo}/>        
+        </JobInfo>
       </JobInterface>
   )
 
