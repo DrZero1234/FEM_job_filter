@@ -78,6 +78,11 @@ function App() {
       900: "#effafa", //hsl(180, 52%, 96%)
     },
 
+    fs_title: "1.25rem",
+    fs_status_btn: "1.15rem",
+
+    padding_status_btn: ".1rem .45rem",
+
     fw_normal: 500,
     fw_bold: 700,
 
@@ -99,27 +104,90 @@ const JobTab = ({jobData}) => {
     background-color: white;
     width: 100%;
     padding: 1.5rem;
+    border-left: ${featured ? (props => `5px solid ${props.theme.primary_500}`) : ""};
   `
 
   const JobInfo = styled.div`
     display:grid;
     grid-template-areas:
-    "image company-name job-status"
+    "image company-status company-status"
     "image position-name ."
     "image job-details .";
-    grid-template-columns: repeat(3,1fr)
+    align-items: center;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 1rem;
     grid-template-rows:auto
+  `
+
+  const CompanyStatusWrapper = styled.div`
+    display:flex;
+    align-items: center;
+    gap: 1rem;
+    grid-area: company-status;
+  `
+
+  const CompanyName = styled.h2`
+    color: ${props => props.theme.primary_500};
+    font-weight: ${props => props.theme.fw_bold};
+    font-size ${props => props.theme.fs_status_btn};
+  `
+  const JobStatusWrapper = styled.div`
+    display: flex;
+    flex-direction:row;
+    gap: .75rem;
+    align-items:center;
+   `
+
+  const NewBtn = styled.button `
+    display: ${new_key ? "block" : "none"};
+    font-weight: ${props => props.theme.fw_bold};
+    font-size: ${props => props.theme.fs_status_btn};
+    border: none;
+    border-radius: 100vw;
+    padding: ${props => props.theme.padding_status_btn};
+    background-color: ${props => props.theme.primary_500};
+    color: ${props => props.theme.neutral[900]};
+  `
+
+  const FeaturedBtn = styled(NewBtn)`
+    background-color: ${props => props.theme.neutral[200]};
   `
 
   const PositionImage = styled.div`
     grid-area: image;
-    
+  `
+
+  const PositionText = styled.h1`
+    grid-area:position-name;
+    font-size: ${props => props.theme.fs_title};
+    font-weight: ${props => props.theme.fw_bold};
+  `
+
+  const JobTimeList = styled.ul`
+    display: flex;
+    color: ${props => props.theme.neutral[200]};
+    gap: 1.25rem;
+    list-style-type: none;
+    grid-area: job-details;
   `
 
   return(
       <JobInterface>
         <JobInfo>
-          <PositionImage as="img" src={logo}/>        
+          <CompanyStatusWrapper>
+            <CompanyName>{company}</CompanyName>
+            <JobStatusWrapper>
+              <NewBtn>New!</NewBtn>
+              <FeaturedBtn>Featured</FeaturedBtn>
+            </JobStatusWrapper>
+          </CompanyStatusWrapper>
+          <PositionImage as="img" src={logo}/>
+          <PositionText>{position}</PositionText>
+          <JobTimeList>
+            <li>{postedAt}</li>
+            <li>{contract}</li>
+            <li>{location}</li>
+          </JobTimeList>      
         </JobInfo>
       </JobInterface>
   )
@@ -132,9 +200,9 @@ const JobsListing = ({jobs_arr}) => {
   console.log(jobs_arr)
 
   const JobListing = styled.div`
-    margin: 5rem 7.5rem;
+    padding: 5rem 7.5rem;
     border: 2px solid black;
-    min-width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
