@@ -82,6 +82,7 @@ function App() {
     fs_status_btn: "1.15rem",
 
     padding_status_btn: ".1rem .45rem",
+    padding_btn_lg: ".25rem .55rem",
 
     fw_normal: 500,
     fw_bold: 700,
@@ -95,6 +96,11 @@ function App() {
 const JobTab = ({jobData}) => {
   const new_key = jobData.new;
   const {id,company,logo,featured,position,role,level,postedAt,contract,location,languages,tools} = jobData;
+
+  // Right side of the 
+  const right_btn_data = [position,role,].concat(...languages);
+
+  console.log(right_btn_data)
   
 
 
@@ -129,7 +135,7 @@ const JobTab = ({jobData}) => {
   const CompanyName = styled.h2`
     color: ${props => props.theme.primary_500};
     font-weight: ${props => props.theme.fw_bold};
-    font-size ${props => props.theme.fs_status_btn};
+    font-size: ${props => props.theme.fs_status_btn};
   `
   const JobStatusWrapper = styled.div`
     display: flex;
@@ -158,11 +164,16 @@ const JobTab = ({jobData}) => {
   `
 
   const PositionText = styled.h1`
-    grid-area:position-name;
-    font-size: ${props => props.theme.fs_title};
-    font-weight: ${props => props.theme.fw_bold};
-  `
+    grid-area: position-name;
+    font-size: ${(props) => props.theme.fs_title};
+    font-weight: ${(props) => props.theme.fw_bold};
+    &:hover {
+      color: ${(props) => props.theme.primary_500};
+      cursor: pointer
+    }
+  `;
 
+  // Grey text on tab
   const JobTimeList = styled.ul`
     display: flex;
     color: ${props => props.theme.neutral[200]};
@@ -171,29 +182,72 @@ const JobTab = ({jobData}) => {
     grid-area: job-details;
   `
 
-  return(
-      <JobInterface>
-        <JobInfo>
-          <CompanyStatusWrapper>
-            <CompanyName>{company}</CompanyName>
-            <JobStatusWrapper>
-              <NewBtn>New!</NewBtn>
-              <FeaturedBtn>Featured</FeaturedBtn>
-            </JobStatusWrapper>
-          </CompanyStatusWrapper>
-          <PositionImage as="img" src={logo}/>
-          <PositionText>{position}</PositionText>
-          <JobTimeList>
-            <li>{postedAt}</li>
-            <li>{contract}</li>
-            <li>{location}</li>
-          </JobTimeList>      
-        </JobInfo>
-      </JobInterface>
-  )
+  const RightBtnWrapper = styled(JobTimeList) `
+    align-items:center;
+    grid-area: none;
+  `
 
 
+
+
+
+  return (
+    <JobInterface>
+      <JobInfo>
+        <CompanyStatusWrapper>
+          <CompanyName>{company}</CompanyName>
+          <JobStatusWrapper>
+            <NewBtn>New!</NewBtn>
+            <FeaturedBtn>Featured</FeaturedBtn>
+          </JobStatusWrapper>
+        </CompanyStatusWrapper>
+        <PositionImage as="img" src={logo} />
+        <PositionText>{position}</PositionText>
+        <JobTimeList>
+          <li>{postedAt}</li>
+          <li>{contract}</li>
+          <li>{location}</li>
+        </JobTimeList>
+      </JobInfo>
+
+      <RightBtnWrapper>
+        {right_btn_data.map((data) => (
+          <li>
+            <JobFilterButton handleClick={() => console.log("Test")} text={data} />
+          </li>
+        ))}
+      </RightBtnWrapper>
+    </JobInterface>
+  );
 }
+
+
+// Seperate component
+const JobFilterButton = ({handleClick,text}) =>{
+  const FilterButton = styled.button`
+    background-color: ${(props) => props.theme.neutral[800]};
+    color: ${(props) => props.theme.primary_500};
+    padding: ${(props) => props.theme.padding_btn_lg};
+    font-weight: ${(props) => props.theme.fw_bold};
+    font-size: ${(props) => props.theme.fs_status_btn};
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    &:hover {
+      background-color: ${(props) => props.theme.primary_500};
+      color: ${(props) => props.theme.neutral[800]};
+    }
+  `;
+
+  return(
+    <FilterButton onClick={() => handleClick()}>{text}</FilterButton>
+  )
+}
+
+const FilterTab = () => {
+  return(<h1>Lel</h1>)
+}
+   
 
 const JobsListing = ({jobs_arr}) => {
   
@@ -206,6 +260,7 @@ const JobsListing = ({jobs_arr}) => {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
   `;
 
   return (
@@ -234,11 +289,11 @@ const JobsListing = ({jobs_arr}) => {
           </picture>
         </header>
 
-        <div className="main-container">
-          <main>
+        <main>
+          <div className="main-container">
             <JobsListing jobs_arr={MOCK_DATA} />
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </ThemeProvider>
   );

@@ -82,4 +82,5 @@ header img,svg {
   display: grid;
   min-height: 100vh;
   background-color: hsl(180, 52%, 96%);
+  gap: 3rem;
 }
