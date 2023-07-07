@@ -6,7 +6,7 @@ import mobileHeader from "./assets/bg-header-mobile.svg";
 
 import styled from 'styled-components';
 
-import picture from "./assets/account.svg"
+import removeFilterImg from "./assets/icon-remove.svg"
 
 
 import data from "./data/data.json"
@@ -64,7 +64,7 @@ const MOCK_DATA =
 
 function App() {
   const [count, setCount] = useState(0);
-  const [filters,setFilters] = useState([]);
+  const [activeFilters,setActiveFilters] = useState(["item1","item2","item3"]);  
   const [allJobs, setAllJobs] = useState([JSON.parse(JSON.stringify(data))][0]);
   const [filteredJobs,setFilteredJobs] = useState([]);
 
@@ -233,6 +233,7 @@ const JobFilterButton = ({handleClick,text}) =>{
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
+    white-space: nowrap;
     &:hover {
       background-color: ${(props) => props.theme.primary_500};
       color: ${(props) => props.theme.neutral[800]};
@@ -244,24 +245,76 @@ const JobFilterButton = ({handleClick,text}) =>{
   )
 }
 
-const FilterTab = () => {
-  return(<h1>Lel</h1>)
+const FilterTab = ({currentFilters}) => {
+  console.log(currentFilters)
+  const FilterWrapper = styled.div`
+    display: ${currentFilters ? "flex" : "none"};
+    justify-content: space-between;
+    padding: 2rem;
+    border: 3px solid black;
+    width: 100%;
+    align-items:center;
+    background-color: white;
+  `
+
+const FilterButtonList = styled.ul `
+  display: flex;
+  list-style-type: none;
+  gap: 1rem;
+`
+
+
+  return (
+    <FilterWrapper>
+      <FilterButtonList>
+        {currentFilters.map((filter) => (
+          <ActiveFilterButton text={filter} />
+        ))}
+      </FilterButtonList>
+      <a href='lel'>k</a>
+    </FilterWrapper>
+  );
+}
+
+const ActiveFilterButton = ({text}) => {
+  const ActiveFilterWrapper = styled.div `
+    display: flex;
+    font-weight: ${(props) => props.theme.fw_bold};
+    font-size: ${(props) => props.theme.fs_status_btn};
+  `
+
+  const ActiveFilterDiv = styled.div`
+    background-color: ${(props) => props.theme.neutral[800]};
+    color: ${(props) => props.theme.primary_500};
+    padding: ${props => props.theme.padding_btn_lg};
+  `;
+
+  const ActiveFilterCloseBtn = styled.button`
+    background-color: ${(props) => props.theme.primary_500};
+    padding: ${props => props.theme.padding_btn_lg};
+  `;
+
+  return(
+    <ActiveFilterWrapper>
+      <ActiveFilterDiv>{text}</ActiveFilterDiv>
+      <ActiveFilterButton><img src={removeFilterImg} alt='remove filter'/></ActiveFilterButton>
+    </ActiveFilterWrapper>
+  )
 }
    
 
 const JobsListing = ({jobs_arr}) => {
   
-  console.log(jobs_arr)
 
   const JobListing = styled.div`
-    padding: 5rem 7.5rem;
     border: 2px solid black;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
   `;
+
+
 
   return (
     <JobListing>
@@ -291,6 +344,14 @@ const JobsListing = ({jobs_arr}) => {
 
         <main>
           <div className="main-container">
+            <FilterTab currentFilters={activeFilters}>
+              <div>
+                <button>One</button>
+                <button>Two</button>
+                <button>Three</button>
+              </div>
+              <a href="#">Clear</a>
+            </FilterTab>
             <JobsListing jobs_arr={MOCK_DATA} />
           </div>
         </main>

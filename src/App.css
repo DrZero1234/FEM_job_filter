@@ -75,12 +75,37 @@ header {
 }
 
 header img,svg {
-  min-width: 100vw
+  min-width: 100vw;
+  z-index: 1;
+}
+
+main {
+  display: grid;
+  min-height: 100vh;
+  background-color: hsl(180, 31%, 95%);
 }
 
 .main-container {
-  display: grid;
+  padding: 0rem 7.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  background-color: hsl(180, 52%, 96%);
   gap: 3rem;
+  outline: 3px solid red;
+}
+
+.filter-block {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  border: 3px solid black;
+  width: 100%;
+  z-index: 10;
+}
+
+@media screen and (max-width: 40em) {
+  .main-container {
+    padding: 0rem 3.5rem;
+  }
 }
