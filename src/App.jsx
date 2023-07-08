@@ -211,8 +211,8 @@ const JobTab = ({jobData}) => {
       </JobInfo>
 
       <RightBtnWrapper>
-        {right_btn_data.map((data) => (
-          <li>
+        {right_btn_data.map((data,i) => (
+          <li key={i}>
             <JobFilterButton handleClick={() => console.log("Test")} text={data} />
           </li>
         ))}
@@ -263,6 +263,15 @@ const FilterButtonList = styled.ul `
   gap: 1rem;
 `
 
+const ClearAllText = styled.a `
+  color: ${props => props.theme.primary_500};
+  font-weight: ${props => props.theme.fw_bold};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 
   return (
     <FilterWrapper>
@@ -271,7 +280,7 @@ const FilterButtonList = styled.ul `
           <ActiveFilterButton text={filter} />
         ))}
       </FilterButtonList>
-      <a href='lel'>k</a>
+      <ClearAllText href="#"  onClick={(e) => {e.preventDefault();console.log("lel")}}>Clear</ClearAllText>
     </FilterWrapper>
   );
 }
@@ -292,12 +301,17 @@ const ActiveFilterButton = ({text}) => {
   const ActiveFilterCloseBtn = styled.button`
     background-color: ${(props) => props.theme.primary_500};
     padding: ${props => props.theme.padding_btn_lg};
+    border: none;
+    &:hover {
+      background-color: ${props => props.theme.neutral[200]};
+      cursor: pointer;
+    }
   `;
 
   return(
     <ActiveFilterWrapper>
       <ActiveFilterDiv>{text}</ActiveFilterDiv>
-      <ActiveFilterButton><img src={removeFilterImg} alt='remove filter'/></ActiveFilterButton>
+      <ActiveFilterCloseBtn><img src={removeFilterImg} alt='remove filter'/></ActiveFilterCloseBtn>
     </ActiveFilterWrapper>
   )
 }
