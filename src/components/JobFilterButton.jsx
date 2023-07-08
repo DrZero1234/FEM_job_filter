@@ -16,12 +16,10 @@ const FilterButton = styled.button`
   }
 `;
 
-const addFilter = (e) => {
-    console.log("Add this filter text");
-}
 
-export const JobFilterButton = ({ handleClick, text }) => {
+
+export const JobFilterButton = ({ handleClick, btn_key,value }) => {
   return (
-    <FilterButton onClick={(e) => addFilter(e)}>{text}</FilterButton>
+    <FilterButton onClick={(e) => handleClick(e)}>{value}</FilterButton>
   );
 };

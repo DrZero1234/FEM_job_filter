@@ -93,6 +93,7 @@ main {
   min-height: 100vh;
   gap: 3rem;
   outline: 3px solid red;
+  margin-top: 3rem;
 }
 
 .filter-block {

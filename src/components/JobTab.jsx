@@ -68,6 +68,7 @@ import { JobFilterButton } from "./JobFilterButton";
 
   const CompanyImage = styled.div`
     grid-area: image;
+    min-width: 100%;
   `;
 
     const PositionText = styled.h1`
@@ -91,7 +92,7 @@ import { JobFilterButton } from "./JobFilterButton";
 
 const RightBtnWrapper = styled(JobTimeList)`
     align-items: center;
-    grid-area: none;
+    flex-wrap: wrap;
   `;
 
 export const JobTab = ({ jobData }) => {
@@ -112,7 +113,12 @@ export const JobTab = ({ jobData }) => {
   } = jobData;
 
   // Right side of the
-  const right_btn_data = [position, role].concat(...languages);
+
+  //const right_btn_data = [role,level].concat(...languages).concat(...tools);
+
+  const right_btn_data = {role,level,languages,tools}
+
+  const entries = Object.entries(right_btn_data);
 
 
   return (
@@ -135,14 +141,24 @@ export const JobTab = ({ jobData }) => {
       </JobInfo>
 
       <RightBtnWrapper>
-        {right_btn_data.map((data, i) => (
-          <li key={i}>
-            <JobFilterButton
-              handleClick={addFilter}
-              text={data}
-            />
-          </li>
-        ))}
+        {entries.map((entry,i) => {
+          // entry[0] - btn_key
+          // entry[1] - btn_value
+          if (typeof entry[1] === "string") {
+            return(
+            <li key={i}>
+              <JobFilterButton handleClick={addFilter} btn_key={entry[0]} value={entry[1]} />
+            </li>)
+          } else {
+            {entry[1].map(value => {
+              return(
+              <li key={i}>
+                <JobFilterButton handleClick={addFilter} btn_key={entry[0]} value={value} />
+              </li>
+              )
+            })}
+            }
+        })}
       </RightBtnWrapper>
     </JobInterface>
   );

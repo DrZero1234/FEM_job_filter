@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 
 import { JobsListing } from './components/JobsListing';
+import { FilterTab } from './components/FilterTab';
 
 import desktopHeader from "./assets/bg-header-desktop.svg";
 import mobileHeader from "./assets/bg-header-mobile.svg";
@@ -65,10 +66,17 @@ const MOCK_DATA =
 ];
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [activeFilters,setActiveFilters] = useState(["item1","item2","item3"]);  
-  const [allJobs, setAllJobs] = useState([JSON.parse(JSON.stringify(data))][0]);
-  const [filteredJobs,setFilteredJobs] = useState([]);
+  const [jobsList, setJobsList] = useState([JSON.parse(JSON.stringify(data))][0]);
+  const [currentFilters, setCurrentFilters] = useState([
+    "item1",
+    "item2",
+  ]);
+  console.log(currentFilters)
+
+  const clearFilters = (e) => {
+    e.preventDefault();
+    setCurrentFilters([]);
+  }
 
   const pageTheme = {
     primary_500: "#5ba4a4", //hsl(180, 29%, 50%)
@@ -92,110 +100,6 @@ function App() {
 
   };
 
-
-
-
-
-
-// Seperate component
-const JobFilterButton = ({handleClick,text}) =>{
-  const FilterButton = styled.button`
-    background-color: ${(props) => props.theme.neutral[800]};
-    color: ${(props) => props.theme.primary_500};
-    padding: ${(props) => props.theme.padding_btn_lg};
-    font-weight: ${(props) => props.theme.fw_bold};
-    font-size: ${(props) => props.theme.fs_status_btn};
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    white-space: nowrap;
-    &:hover {
-      background-color: ${(props) => props.theme.primary_500};
-      color: ${(props) => props.theme.neutral[800]};
-    }
-  `;
-
-  return(
-    <FilterButton onClick={() => handleClick()}>{text}</FilterButton>
-  )
-}
-
-const FilterTab = ({currentFilters}) => {
-  console.log(currentFilters)
-  const FilterWrapper = styled.div`
-    display: ${currentFilters ? "flex" : "none"};
-    justify-content: space-between;
-    padding: 2rem;
-    border: 3px solid black;
-    width: 100%;
-    align-items:center;
-    background-color: white;
-  `
-
-const FilterButtonList = styled.ul `
-  display: flex;
-  list-style-type: none;
-  gap: 1rem;
-`
-
-const ClearAllText = styled.a `
-  color: ${props => props.theme.primary_500};
-  font-weight: ${props => props.theme.fw_bold};
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-
-  return (
-    <FilterWrapper>
-      <FilterButtonList>
-        {currentFilters.map((filter) => (
-          <ActiveFilterButton text={filter} />
-        ))}
-      </FilterButtonList>
-      <ClearAllText href="#"  onClick={(e) => {e.preventDefault();console.log("lel")}}>Clear</ClearAllText>
-    </FilterWrapper>
-  );
-}
-
-const ActiveFilterButton = ({text}) => {
-  const ActiveFilterWrapper = styled.div `
-    display: flex;
-    font-weight: ${(props) => props.theme.fw_bold};
-    font-size: ${(props) => props.theme.fs_status_btn};
-  `
-
-  const ActiveFilterDiv = styled.div`
-    background-color: ${(props) => props.theme.neutral[800]};
-    color: ${(props) => props.theme.primary_500};
-    padding: ${props => props.theme.padding_btn_lg};
-  `;
-
-  const ActiveFilterCloseBtn = styled.button`
-    background-color: ${(props) => props.theme.primary_500};
-    padding: ${props => props.theme.padding_btn_lg};
-    border: none;
-    &:hover {
-      background-color: ${props => props.theme.neutral[200]};
-      cursor: pointer;
-    }
-  `;
-
-  return(
-    <ActiveFilterWrapper>
-      <ActiveFilterDiv>{text}</ActiveFilterDiv>
-      <ActiveFilterCloseBtn><img src={removeFilterImg} alt='remove filter'/></ActiveFilterCloseBtn>
-    </ActiveFilterWrapper>
-  )
-}
-   
-
-
-
-
-
   return (
     <ThemeProvider theme={pageTheme}>
       <div className="container">
@@ -212,7 +116,7 @@ const ActiveFilterButton = ({text}) => {
 
         <main>
           <div className="main-container">
-            <FilterTab currentFilters={activeFilters}>
+            <FilterTab currentFilters = {currentFilters} clearFilters={clearFilters}>
               <div>
                 <button>One</button>
                 <button>Two</button>
@@ -220,7 +124,7 @@ const ActiveFilterButton = ({text}) => {
               </div>
               <a href="#">Clear</a>
             </FilterTab>
-            <JobsListing jobs_arr={MOCK_DATA} />
+            <JobsListing jobs_arr={jobsList} />
           </div>
         </main>
       </div>
