@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
+import { JobsListing } from './components/JobsListing';
+
 import desktopHeader from "./assets/bg-header-desktop.svg";
 import mobileHeader from "./assets/bg-header-mobile.svg";
 
@@ -93,133 +95,6 @@ function App() {
 
 
 
-const JobTab = ({jobData}) => {
-  const new_key = jobData.new;
-  const {id,company,logo,featured,position,role,level,postedAt,contract,location,languages,tools} = jobData;
-
-  // Right side of the 
-  const right_btn_data = [position,role,].concat(...languages);
-
-  console.log(right_btn_data)
-  
-
-
-  const JobInterface = styled.div`
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    width: 100%;
-    padding: 1.5rem;
-    border-left: ${featured ? (props => `5px solid ${props.theme.primary_500}`) : ""};
-  `
-
-  const JobInfo = styled.div`
-    display:grid;
-    grid-template-areas:
-    "image company-status company-status"
-    "image position-name ."
-    "image job-details .";
-    align-items: center;
-    grid-template-columns: auto 1fr 1fr;
-    gap: 1rem;
-    grid-template-rows:auto
-  `
-
-  const CompanyStatusWrapper = styled.div`
-    display:flex;
-    align-items: center;
-    gap: 1rem;
-    grid-area: company-status;
-  `
-
-  const CompanyName = styled.h2`
-    color: ${props => props.theme.primary_500};
-    font-weight: ${props => props.theme.fw_bold};
-    font-size: ${props => props.theme.fs_status_btn};
-  `
-  const JobStatusWrapper = styled.div`
-    display: flex;
-    flex-direction:row;
-    gap: .75rem;
-    align-items:center;
-   `
-
-  const NewBtn = styled.button `
-    display: ${new_key ? "block" : "none"};
-    font-weight: ${props => props.theme.fw_bold};
-    font-size: ${props => props.theme.fs_status_btn};
-    border: none;
-    border-radius: 100vw;
-    padding: ${props => props.theme.padding_status_btn};
-    background-color: ${props => props.theme.primary_500};
-    color: ${props => props.theme.neutral[900]};
-  `
-
-  const FeaturedBtn = styled(NewBtn)`
-    background-color: ${props => props.theme.neutral[200]};
-  `
-
-  const PositionImage = styled.div`
-    grid-area: image;
-  `
-
-  const PositionText = styled.h1`
-    grid-area: position-name;
-    font-size: ${(props) => props.theme.fs_title};
-    font-weight: ${(props) => props.theme.fw_bold};
-    &:hover {
-      color: ${(props) => props.theme.primary_500};
-      cursor: pointer
-    }
-  `;
-
-  // Grey text on tab
-  const JobTimeList = styled.ul`
-    display: flex;
-    color: ${props => props.theme.neutral[200]};
-    gap: 1.25rem;
-    list-style-type: none;
-    grid-area: job-details;
-  `
-
-  const RightBtnWrapper = styled(JobTimeList) `
-    align-items:center;
-    grid-area: none;
-  `
-
-
-
-
-
-  return (
-    <JobInterface>
-      <JobInfo>
-        <CompanyStatusWrapper>
-          <CompanyName>{company}</CompanyName>
-          <JobStatusWrapper>
-            <NewBtn>New!</NewBtn>
-            <FeaturedBtn>Featured</FeaturedBtn>
-          </JobStatusWrapper>
-        </CompanyStatusWrapper>
-        <PositionImage as="img" src={logo} />
-        <PositionText>{position}</PositionText>
-        <JobTimeList>
-          <li>{postedAt}</li>
-          <li>{contract}</li>
-          <li>{location}</li>
-        </JobTimeList>
-      </JobInfo>
-
-      <RightBtnWrapper>
-        {right_btn_data.map((data,i) => (
-          <li key={i}>
-            <JobFilterButton handleClick={() => console.log("Test")} text={data} />
-          </li>
-        ))}
-      </RightBtnWrapper>
-    </JobInterface>
-  );
-}
 
 
 // Seperate component
@@ -317,27 +192,6 @@ const ActiveFilterButton = ({text}) => {
 }
    
 
-const JobsListing = ({jobs_arr}) => {
-  
-
-  const JobListing = styled.div`
-    border: 2px solid black;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  `;
-
-
-
-  return (
-    <JobListing>
-      {jobs_arr.map((job) => (
-        <JobTab jobData={job} />
-      ))}
-    </JobListing>
-  );
-}
 
 
 
