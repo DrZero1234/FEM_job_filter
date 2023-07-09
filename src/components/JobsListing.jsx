@@ -9,11 +9,11 @@ export const JobListing = styled.div`
     gap: 1rem;
 `;
 
-export const JobsListing = ({ jobs_arr, setCurrentFilters}) => {
+export const JobsListing = ({ jobs_arr, setCurrentFilters,addFilter}) => {
   return (
     <JobListing>
       {jobs_arr.map((job) => (
-        <JobTab jobData={job}/>
+        <JobTab jobData={job} addFilter = {addFilter}/>
       ))}
     </JobListing>
   );

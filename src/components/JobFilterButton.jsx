@@ -17,19 +17,14 @@ const FilterButton = styled.button`
 `;
 
 
-const addFilter = (e) => {
-  console.log(e.target)
-};
 
 
-export const JobFilterButton = ({btn_key,value }) => {
-
-
+export const JobFilterButton = ({btn_key,value,addFilter }) => {
   return(
     <>
-      {typeof value !== "object" ? <li><FilterButton onClick={(e) => addFilter(e)}>{value}</FilterButton> </li> :
+      {typeof value !== "object" ? <li><FilterButton onClick={() => addFilter(btn_key,value)}>{value}</FilterButton> </li> :
       value.map(val => (
-        <li><FilterButton onClick={(e) => addFilter(e)}>{val}</FilterButton></li>
+        <li><FilterButton onClick={() => addFilter(btn_key,val)}>{val}</FilterButton></li>
       ))
       }
     </>

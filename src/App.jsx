@@ -67,10 +67,9 @@ const MOCK_DATA =
 
 function App() {
   const [jobsList, setJobsList] = useState([JSON.parse(JSON.stringify(data))][0]);
-  const [currentFilters, setCurrentFilters] = useState([
-    "item1",
-    "item2",
-  ]);
+  const [currentFilters, setCurrentFilters] = useState(
+    {role: "",level: "",languages: [],tools: []}
+  );
   console.log(currentFilters)
 
   const clearFilters = (e) => {
@@ -78,13 +77,23 @@ function App() {
     setCurrentFilters([]);
   }
 
-  const removeFilter = (val) => {
-    const index = currentFilters.indexOf(val)+1;
-    if (index !== -1) {
-      setCurrentFilters(currentFilters.splice(index,1))
+
+  // Todo the languages and tools value should add to 
+  const addFilter = (key,val) => {
+    if (key === "role" || key === "level") {
+      setCurrentFilters({ ...currentFilters, [`${key}`]: val });
     }
-    console.log(currentFilters)
+    console.log(currentFilters);
   }
+
+  const removeFilter =(key) => {
+    const copy = {...currentFilters};
+
+    delete copy[key];
+
+    setCurrentFilters(copy)
+  }
+  
 
   const pageTheme = {
     primary_500: "#5ba4a4", //hsl(180, 29%, 50%)
@@ -132,7 +141,7 @@ function App() {
               </div>
               <a href="#">Clear</a>
             </FilterTab>
-            <JobsListing jobs_arr={jobsList} />
+            <JobsListing jobs_arr={jobsList} addFilter = {addFilter} />
           </div>
         </main>
       </div>

@@ -93,7 +93,7 @@ const RightBtnWrapper = styled(JobTimeList)`
     flex-wrap: wrap;
   `;
 
-export const JobTab = ({ jobData }) => {
+export const JobTab = ({ jobData, addFilter }) => {
   const new_key = jobData.new;
   const {
     id,
@@ -142,7 +142,7 @@ export const JobTab = ({ jobData }) => {
         {entries.map((entry,i) => (
           // entry[0] - btn_key
           // entry[1] - btn_value
-          <JobFilterButton btn_key={entry[0]} value={entry[1]}/> 
+          <JobFilterButton btn_key={entry[0]} value={entry[1]} addFilter = {addFilter} /> 
         ))}
       </RightBtnWrapper>
     </JobInterface>

@@ -24,13 +24,24 @@ const ActiveFilterCloseBtn = styled.button`
     }
   `;
 
-export const ActiveFilterButton = ({text,removeFilter}) => {
+export const ActiveFilterButton = ({filter_key,value,removeFilter}) => {
+
+
+  
+  
   return (
-    <ActiveFilterWrapper>
-      <ActiveFilterDiv>{text}</ActiveFilterDiv>
-      <ActiveFilterCloseBtn onClick={() => removeFilter(text)}>
+    <>
+       {value.length ? (
+           <ActiveFilterWrapper>
+      <ActiveFilterDiv>{value}</ActiveFilterDiv>
+      <ActiveFilterCloseBtn onClick={() => removeFilter(filter_key)}>
         <img src={removeFilterImg} alt="remove filter" />
       </ActiveFilterCloseBtn>
-    </ActiveFilterWrapper>
+    </ActiveFilterWrapper>)
+    : null
+       }
+    </>
+   
+   
   );
 }
