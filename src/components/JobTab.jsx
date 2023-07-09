@@ -3,9 +3,7 @@ import { JobFilterButton } from "./JobFilterButton";
 
 
 
-    const addFilter = (e) => {
-        console.log("Add this filter text");
-    };
+
 
 
   const JobInterface = styled.div`
@@ -141,24 +139,11 @@ export const JobTab = ({ jobData }) => {
       </JobInfo>
 
       <RightBtnWrapper>
-        {entries.map((entry,i) => {
+        {entries.map((entry,i) => (
           // entry[0] - btn_key
           // entry[1] - btn_value
-          if (typeof entry[1] === "string") {
-            return(
-            <li key={i}>
-              <JobFilterButton handleClick={addFilter} btn_key={entry[0]} value={entry[1]} />
-            </li>)
-          } else {
-            {entry[1].map(value => {
-              return(
-              <li key={i}>
-                <JobFilterButton handleClick={addFilter} btn_key={entry[0]} value={value} />
-              </li>
-              )
-            })}
-            }
-        })}
+          <JobFilterButton btn_key={entry[0]} value={entry[1]}/> 
+        ))}
       </RightBtnWrapper>
     </JobInterface>
   );

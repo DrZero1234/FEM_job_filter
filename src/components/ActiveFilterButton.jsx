@@ -24,11 +24,11 @@ const ActiveFilterCloseBtn = styled.button`
     }
   `;
 
-export const ActiveFilterButton = ({text}) => {
+export const ActiveFilterButton = ({text,removeFilter}) => {
   return (
     <ActiveFilterWrapper>
       <ActiveFilterDiv>{text}</ActiveFilterDiv>
-      <ActiveFilterCloseBtn>
+      <ActiveFilterCloseBtn onClick={() => removeFilter(text)}>
         <img src={removeFilterImg} alt="remove filter" />
       </ActiveFilterCloseBtn>
     </ActiveFilterWrapper>

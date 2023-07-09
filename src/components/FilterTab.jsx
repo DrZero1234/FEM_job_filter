@@ -28,12 +28,12 @@ const ClearAllText = styled.a`
   }
 `;
 
-export const FilterTab = ({currentFilters,clearFilters}) => {
+export const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
   return (
     <FilterWrapper $currentFilters = {currentFilters}>
       <FilterButtonList>
         {currentFilters.map((filter) => (
-          <ActiveFilterButton text={filter} />
+          <ActiveFilterButton text={filter} removeFilter = {removeFilter} />
         ))}
       </FilterButtonList>
       <ClearAllText

@@ -78,6 +78,14 @@ function App() {
     setCurrentFilters([]);
   }
 
+  const removeFilter = (val) => {
+    const index = currentFilters.indexOf(val)+1;
+    if (index !== -1) {
+      setCurrentFilters(currentFilters.splice(index,1))
+    }
+    console.log(currentFilters)
+  }
+
   const pageTheme = {
     primary_500: "#5ba4a4", //hsl(180, 29%, 50%)
 
@@ -116,7 +124,7 @@ function App() {
 
         <main>
           <div className="main-container">
-            <FilterTab currentFilters = {currentFilters} clearFilters={clearFilters}>
+            <FilterTab currentFilters = {currentFilters} removeFilter = {removeFilter} clearFilters={clearFilters}>
               <div>
                 <button>One</button>
                 <button>Two</button>
