@@ -66,25 +66,45 @@ const MOCK_DATA =
 ];
 
 function App() {
+  const DEFAULT_FILTER_OBJ = {role: "", level: "", languages: [], tools: []};
+
   const [jobsList, setJobsList] = useState([JSON.parse(JSON.stringify(data))][0]);
   const [currentFilters, setCurrentFilters] = useState(
-    {role: "",level: "",languages: [],tools: []}
+    DEFAULT_FILTER_OBJ
   );
   console.log(currentFilters)
 
   const clearFilters = (e) => {
     e.preventDefault();
-    setCurrentFilters([]);
+    setCurrentFilters(DEFAULT_FILTER_OBJ);
   }
 
 
   // Todo the languages and tools value should add to 
   const addFilter = (key,val) => {
+    let key_arr_copy;
     if (key === "role" || key === "level") {
       setCurrentFilters({ ...currentFilters, [`${key}`]: val });
-    }
-    console.log(currentFilters);
+    } else if (key === "languages") {
+      key_arr_copy = currentFilters["languages"]
+      if (!currentFilters["languages"].includes(val)) {
+        key_arr_copy.push(val);
+        setCurrentFilters({
+          ...currentFilters,
+          languages: key_arr_copy,
+        });
+      }
+    } else if (key === "tools") {
+      key_arr_copy = currentFilters["tools"]
+      if (!currentFilters["tools"].includes(val)) {
+        key_arr_copy.push(val);
+        setCurrentFilters({
+          ...currentFilters,
+          tools: key_arr_copy,
+        });
+      }
   }
+}
 
   const removeFilter =(key) => {
     const copy = {...currentFilters};

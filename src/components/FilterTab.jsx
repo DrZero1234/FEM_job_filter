@@ -1,10 +1,10 @@
-import { styled } from "styled-components";
+import { isStyledComponent, styled } from "styled-components";
 import { ActiveFilterButton } from "./ActiveFilterButton";
 
 
 
 const FilterWrapper = styled.div`
-  display: ${(props) => props.$isEmpty ? "none" : "flex"};
+  display: flex;
   justify-content: space-between;
   padding: 2rem;
   border: 3px solid black;
@@ -31,22 +31,33 @@ const ClearAllText = styled.a`
 `;
 
 export const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
-  const current_filter_keys = Object.keys(currentFilters)
-  const isEmpty = current_filter_keys.every((key) => currentFilters[key].length === 0)
+  const current_filter_keys = Object.keys(currentFilters);
+  // Checks if every key is empty in the currentFilters state
 
-  return (
-    <FilterWrapper $isEmpty = {isEmpty}>
-      <FilterButtonList>
-        {current_filter_keys.map((key) => (
-          <ActiveFilterButton value={currentFilters[key]} filter_key = {key} removeFilter = {removeFilter} />
-        ))}
-      </FilterButtonList>
-      <ClearAllText
-        href="#"
-        onClick={(e) => clearFilters(e)}
-      >
-        Clear
-      </ClearAllText>
-    </FilterWrapper>
-  );
-};
+  const isEmpty = current_filter_keys.every((key) => currentFilters[key].length < 1);
+
+
+  return(
+  <>
+  {/* Only renders the FilterTab if there is an activeFilter */}
+
+  {/* Currently cant remove languages or tools key so its buggy */}
+    {!isEmpty && 
+      <FilterWrapper>
+        <FilterButtonList>
+          {current_filter_keys.map((key) => (
+            <ActiveFilterButton
+              value={currentFilters[key]}
+              filter_key={key}
+              removeFilter={removeFilter}
+            />
+          ))}
+        </FilterButtonList>
+        <ClearAllText href="#" onClick={(e) => clearFilters(e)}>
+          Clear
+        </ClearAllText>
+      </FilterWrapper>
+    }
+  </>
+  )
+}

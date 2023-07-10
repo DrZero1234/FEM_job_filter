@@ -30,18 +30,17 @@ export const ActiveFilterButton = ({filter_key,value,removeFilter}) => {
   
   
   return (
-    <>
-       {value.length ? (
-           <ActiveFilterWrapper>
-      <ActiveFilterDiv>{value}</ActiveFilterDiv>
-      <ActiveFilterCloseBtn onClick={() => removeFilter(filter_key)}>
-        <img src={removeFilterImg} alt="remove filter" />
-      </ActiveFilterCloseBtn>
-    </ActiveFilterWrapper>)
-    : null
-       }
-    </>
-   
-   
+    <ActiveFilterWrapper>
+      {(value.length && typeof value === "string") ? (
+        <>
+          <ActiveFilterDiv>{value}</ActiveFilterDiv>
+          <ActiveFilterCloseBtn
+            onClick={() => removeFilter(filter_key)}
+          >
+            <img src={removeFilterImg} alt="remove filter" />
+          </ActiveFilterCloseBtn>
+        </>
+      ) : null}
+    </ActiveFilterWrapper>
   );
 }
