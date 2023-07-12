@@ -12,8 +12,9 @@ import { JobFilterButton } from "./JobFilterButton";
     background-color: white;
     width: 100%;
     padding: 1.5rem;
+    border-radius: .25rem;
     border-left: ${props => props.$featured
-      ? /*props => */ `5px solid ${props.theme.primary_500}`
+      ? `5px solid ${props.theme.primary_500}`
       : ""};
   `;
 
@@ -90,7 +91,6 @@ import { JobFilterButton } from "./JobFilterButton";
 
 const RightBtnWrapper = styled(JobTimeList)`
     align-items: center;
-    flex-wrap: wrap;
   `;
 
 export const JobTab = ({ jobData, addFilter }) => {
@@ -120,7 +120,7 @@ export const JobTab = ({ jobData, addFilter }) => {
 
 
   return (
-    <JobInterface>
+    <JobInterface $featured = {featured}>
       <JobInfo>
         <CompanyStatusWrapper>
           <CompanyName>{company}</CompanyName>
