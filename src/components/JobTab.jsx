@@ -16,7 +16,12 @@ import { JobFilterButton } from "./JobFilterButton";
     border-left: ${props => props.$featured
       ? `5px solid ${props.theme.primary_500}`
       : ""};
-  `;
+    @media (max-width: 40em) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  `
+  ;
 
   const JobInfo = styled.div`
     display: grid;
