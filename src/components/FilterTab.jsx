@@ -37,27 +37,29 @@ export const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
   const isEmpty = current_filter_keys.every((key) => currentFilters[key].length < 1);
 
 
-  return(
-  <>
-  {/* Only renders the FilterTab if there is an activeFilter */}
+  return (
+    <>
+      {/* Only renders the FilterTab if there is an activeFilter */}
 
-  {/* Currently cant remove languages or tools key so its buggy */}
-    {!isEmpty && 
-      <FilterWrapper>
-        <FilterButtonList>
-          {current_filter_keys.map((key) => (
-            <ActiveFilterButton
-              value={currentFilters[key]}
-              filter_key={key}
-              removeFilter={removeFilter}
-            />
-          ))}
-        </FilterButtonList>
-        <ClearAllText href="#" onClick={(e) => clearFilters(e)}>
-          Clear
-        </ClearAllText>
-      </FilterWrapper>
-    }
-  </>
-  )
+      {/* Currently cant remove languages or tools key so its buggy */}
+      {!isEmpty && (
+        <FilterWrapper>
+          <FilterButtonList>
+            {current_filter_keys.map((key) => (
+              <>
+                <ActiveFilterButton
+                  value={currentFilters[key]}
+                  filter_key={key}
+                  removeFilter={removeFilter}
+                />
+              </>
+            ))}
+          </FilterButtonList>
+          <ClearAllText href="#" onClick={(e) => clearFilters(e)}>
+            Clear
+          </ClearAllText>
+        </FilterWrapper>
+      )}
+    </>
+  );
 }

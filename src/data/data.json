@@ -150,5 +150,20 @@
     "location": "Worldwide",
     "languages": ["JavaScript"],
     "tools": ["React", "Sass"]
+  },
+  {
+    "id": 11,
+    "company": "The Air Filter Company",
+    "logo": "/src/assets/the-air-filter-company.svg",
+    "new": false,
+    "featured": false,
+    "position": "Front-end Dev",
+    "role": "New role",
+    "level": "Junior",
+    "postedAt": "1mo ago",
+    "contract": "Part Time",
+    "location": "Worldwide",
+    "languages": ["JavaScript"],
+    "tools": ["New tool", "Sass"]
   }
 ]
