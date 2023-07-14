@@ -14,6 +14,9 @@ const FilterButton = styled.button`
     background-color: ${(props) => props.theme.primary_500};
     color: ${(props) => props.theme.neutral[800]};
   }
+  @media (max-width: 40em) {
+    white-space: pre-wrap;
+  }
 `;
 
 

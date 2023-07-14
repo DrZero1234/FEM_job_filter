@@ -7,7 +7,6 @@ const FilterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 2rem;
-  border: 3px solid black;
   width: 100%;
   align-items: center;
   background-color: white;
@@ -17,6 +16,7 @@ const FilterButtonList = styled.ul`
   display: flex;
   list-style-type: none;
   gap: 1rem;
+  flex-wrap: wrap;
 `;
 
 const ClearAllText = styled.a`

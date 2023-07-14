@@ -5,6 +5,14 @@ import { JobFilterButton } from "./JobFilterButton";
 
 
 
+  const Separator = styled.hr`
+    display: none;
+    @media (max-width: 40em) {
+      display: flex;
+      flex: 1;
+      color: ${(props) => props.theme.neutral[200]};
+    }
+  `;
 
   const JobInterface = styled.div`
     display: flex;
@@ -19,6 +27,8 @@ import { JobFilterButton } from "./JobFilterButton";
     @media (max-width: 40em) {
       flex-direction: column;
       justify-content: center;
+      gap: 2rem;
+      position: relative
     }
   `
   ;
@@ -30,9 +40,19 @@ import { JobFilterButton } from "./JobFilterButton";
       "image position-name ."
       "image job-details .";
     align-items: center;
-    grid-template-columns: auto 1fr 1fr;
+    grid-template-columns: auto 1fr;
     gap: 1rem;
     grid-template-rows: auto;
+    @media (max-width: 40em) {
+      grid-template-areas:
+      "image ."
+      "company-status company-status"
+      "position-name position-name"
+      "job-details job-details";
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+
+    } 
   `;
 
   const CompanyStatusWrapper = styled.div`
@@ -40,6 +60,9 @@ import { JobFilterButton } from "./JobFilterButton";
     align-items: center;
     gap: 1rem;
     grid-area: company-status;
+    @media (max-width: 40em) {
+      margin-top: 2rem;
+    }
   `;
 
   const CompanyName = styled.h2`
@@ -72,7 +95,15 @@ import { JobFilterButton } from "./JobFilterButton";
 
   const CompanyImage = styled.div`
     grid-area: image;
-    min-width: 100%;
+
+    @media (max-width: 40em) {
+      position: absolute;
+      max-width: 88px;
+      top: -2rem;
+    }
+    @media (min-width: 40em) {
+      min-width: 100%;
+    }
   `;
 
     const PositionText = styled.h1`
@@ -95,7 +126,11 @@ import { JobFilterButton } from "./JobFilterButton";
   `;
 
 const RightBtnWrapper = styled(JobTimeList)`
+    flex-wrap: nowrap;
     align-items: center;
+    @media (max-width: 40em) {
+      flex-wrap: wrap;
+    }
   `;
 
 export const JobTab = ({ jobData, addFilter }) => {
@@ -130,8 +165,8 @@ export const JobTab = ({ jobData, addFilter }) => {
         <CompanyStatusWrapper>
           <CompanyName>{company}</CompanyName>
           <JobStatusWrapper>
-            <NewBtn $new_key={new_key}>New!</NewBtn>
-            <FeaturedBtn $featured = {featured}>Featured</FeaturedBtn>
+            <NewBtn $new_key={new_key}>NEW!</NewBtn>
+            <FeaturedBtn $featured = {featured}>FEATURED</FeaturedBtn>
           </JobStatusWrapper>
         </CompanyStatusWrapper>
         <CompanyImage as="img" src={logo} />
@@ -142,7 +177,7 @@ export const JobTab = ({ jobData, addFilter }) => {
           <li>{location}</li>
         </JobTimeList>
       </JobInfo>
-
+      <Separator />
       <RightBtnWrapper>
         {entries.map((entry,i) => (
           // entry[0] - btn_key

@@ -41,7 +41,6 @@ a:not([class]) {
 img,
 picture,
 svg {
-  max-width: 100%;
   display: block;
 }
 
@@ -92,7 +91,6 @@ main {
   align-items: center;
   min-height: 100vh;
   gap: 3rem;
-  outline: 3px solid red;
   margin-top: 3rem;
 }
 
@@ -100,7 +98,6 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 2rem;
-  border: 3px solid black;
   width: 100%;
   z-index: 10;
 }
