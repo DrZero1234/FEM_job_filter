@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { PropTypes } from "prop-types";
 
 const FilterButton = styled.button`
   background-color: ${(props) => props.theme.neutral[800]};
@@ -21,8 +22,9 @@ const FilterButton = styled.button`
 
 
 
-
-export const JobFilterButton = ({btn_key,value,addFilter }) => {
+// Generates a button from the position,role,languages,roles keys
+// By clicking these button the key value will be added to the filters
+const JobFilterButton =  ({btn_key,value,addFilter }) =>  {
   return(
     <>
       {typeof value !== "object" ? <li><FilterButton onClick={() => addFilter(btn_key,value)}>{value}</FilterButton> </li> :
@@ -32,4 +34,16 @@ export const JobFilterButton = ({btn_key,value,addFilter }) => {
       }
     </>
   )
+}
+
+JobFilterButton.propTypes =  {
+  btn_key: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]).isRequired,
+  addFilter: PropTypes.func.isRequired
 };
+
+
+export default JobFilterButton

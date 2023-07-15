@@ -1,5 +1,6 @@
 import { isStyledComponent, styled } from "styled-components";
-import { ActiveFilterButton } from "./ActiveFilterButton";
+import ActiveFilterButton from "./ActiveFilterButton";
+import { PropTypes } from "prop-types";
 
 
 
@@ -22,7 +23,7 @@ const FilterButtonList = styled.ul`
 const ClearAllText = styled.a`
 
   color: ${(props) => props.theme.primary_500};
-  font-weight: ${(props) => props.theme.fw_bold};
+  font-size: ${(props) => props.theme.fs_title};
   text-decoration: none;
   justify-self: flex-end;
   &:hover {
@@ -30,18 +31,17 @@ const ClearAllText = styled.a`
   }
 `;
 
-export const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
+const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
   const current_filter_keys = Object.keys(currentFilters);
   // Checks if every key is empty in the currentFilters state
 
+  // Checks if the current Filter object dont have any value in it
   const isEmpty = current_filter_keys.every((key) => currentFilters[key].length < 1);
 
 
   return (
     <>
       {/* Only renders the FilterTab if there is an activeFilter */}
-
-      {/* Currently cant remove languages or tools key so its buggy */}
       {!isEmpty && (
         <FilterWrapper>
           <FilterButtonList>
@@ -63,3 +63,11 @@ export const FilterTab = ({currentFilters,clearFilters,removeFilter}) => {
     </>
   );
 }
+
+FilterTab.propTypes = {
+  currentFilters: PropTypes.object.isRequired,
+  clearFilters: PropTypes.func.isRequired,
+  removeFilter: PropTypes.func.isRequired,
+}
+
+export default FilterTab

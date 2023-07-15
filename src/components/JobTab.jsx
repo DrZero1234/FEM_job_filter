@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
-import { JobFilterButton } from "./JobFilterButton";
+import JobFilterButton from "./JobFilterButton";
+import { PropTypes } from "prop-types";
 
 
 
@@ -68,7 +69,7 @@ import { JobFilterButton } from "./JobFilterButton";
   const CompanyName = styled.h2`
     color: ${(props) => props.theme.primary_500};
     font-weight: ${(props) => props.theme.fw_bold};
-    font-size: ${(props) => props.theme.fs_status_btn};
+    font-size: ${(props) => props.theme.fs_title};
   `;
   const JobStatusWrapper = styled.div`
     display: flex;
@@ -120,12 +121,13 @@ import { JobFilterButton } from "./JobFilterButton";
   const JobTimeList = styled.ul`
     display: flex;
     color: ${(props) => props.theme.neutral[200]};
+    font-size: ${props => props.theme.fs_status_btn};
     gap: 1.25rem;
-    list-style-type: none;
     grid-area: job-details;
   `;
 
 const RightBtnWrapper = styled(JobTimeList)`
+    list-style-type: none;
     flex-wrap: nowrap;
     align-items: center;
     @media (max-width: 40em) {
@@ -133,7 +135,7 @@ const RightBtnWrapper = styled(JobTimeList)`
     }
   `;
 
-export const JobTab = ({ jobData, addFilter }) => {
+ const JobTab = ({ jobData, addFilter }) => {
   const new_key = jobData.new;
   const {
     id,
@@ -179,7 +181,7 @@ export const JobTab = ({ jobData, addFilter }) => {
       </JobInfo>
       <Separator />
       <RightBtnWrapper>
-        {entries.map((entry,i) => (
+        {entries.map((entry) => (
           // entry[0] - btn_key
           // entry[1] - btn_value
           <JobFilterButton btn_key={entry[0]} value={entry[1]} addFilter = {addFilter} /> 
@@ -188,3 +190,10 @@ export const JobTab = ({ jobData, addFilter }) => {
     </JobInterface>
   );
 };
+
+JobTab.propTypes = {
+  jobData: PropTypes.object.isRequired,
+  addFilter: PropTypes.func.isRequired,
+}
+
+export default JobTab

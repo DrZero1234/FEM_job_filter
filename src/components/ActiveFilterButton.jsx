@@ -1,5 +1,7 @@
 import removeFilterImg from "../assets/icon-remove.svg";
 import { styled } from "styled-components";
+import {PropTypes} from "prop-types";
+
 
 
 const ActiveFilterWrapper = styled.div`
@@ -24,13 +26,16 @@ const ActiveFilterCloseBtn = styled.button`
     }
   `;
 
-export const ActiveFilterButton = ({filter_key,value,removeFilter}) => {
 
 
-  
+function ActiveFilterButton ({filter_key,value,removeFilter})  {
+
+
+  // Only returns the filters that has at least one character as a value
   if (value.length) {
     return (
       <>
+        {/* If the value is string (this case the key is role or position) */}
         {typeof value === "string" ? (
           <ActiveFilterWrapper>
             <ActiveFilterDiv>{value}</ActiveFilterDiv>
@@ -41,6 +46,7 @@ export const ActiveFilterButton = ({filter_key,value,removeFilter}) => {
             </ActiveFilterCloseBtn>
           </ActiveFilterWrapper>
         ) : (
+          // Returns a button of every value of the languages or roles key
           value.map((val) => (
             <ActiveFilterWrapper>
               <ActiveFilterDiv>{val}</ActiveFilterDiv>
@@ -55,5 +61,16 @@ export const ActiveFilterButton = ({filter_key,value,removeFilter}) => {
       </>
     );
   }
-  
 }
+
+ActiveFilterButton.propTypes = {
+  filter_key: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]).isRequired,
+  removeFilter: PropTypes.func.isRequired
+
+}
+
+export default ActiveFilterButton;

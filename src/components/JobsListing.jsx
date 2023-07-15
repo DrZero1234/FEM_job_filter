@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
-import { JobTab } from "./JobTab";
+import JobTab from "./JobTab";
+import { PropTypes } from "prop-types";
 
 export const JobListing = styled.div`
     width: 100%;
@@ -11,7 +12,7 @@ export const JobListing = styled.div`
     }
 `;
 
-export const JobsListing = ({ jobs_arr, setCurrentFilters,addFilter}) => {
+function JobsListing ({ jobs_arr,addFilter}) {
   return (
     <JobListing>
       {jobs_arr.map((job) => (
@@ -19,4 +20,13 @@ export const JobsListing = ({ jobs_arr, setCurrentFilters,addFilter}) => {
       ))}
     </JobListing>
   );
-};
+}
+
+JobsListing.propTypes =  {
+  jobs_arr: PropTypes.array.isRequired,
+  addFilter: PropTypes.func.isRequired
+}
+
+export default JobsListing
+
+
