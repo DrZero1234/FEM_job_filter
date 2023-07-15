@@ -174,7 +174,7 @@ const RightBtnWrapper = styled(JobTimeList)`
         <CompanyImage as="img" src={logo} />
         <PositionText>{position}</PositionText>
         <JobTimeList>
-          <li>{postedAt}</li>
+          <li style={{listStyleType: "none"}}>{postedAt}</li>
           <li>{contract}</li>
           <li>{location}</li>
         </JobTimeList>
