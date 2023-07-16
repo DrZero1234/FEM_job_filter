@@ -1,4 +1,4 @@
-import removeFilterImg from "../assets/icon-remove.svg";
+import removeFilterImg from "/assets/icon-remove.svg";
 import { styled } from "styled-components";
 import {PropTypes} from "prop-types";
 
