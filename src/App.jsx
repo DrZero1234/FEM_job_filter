@@ -156,7 +156,6 @@ function App() {
           <picture className="header-picture">
             <source
               srcSet={desktopHeader}
-              alt="Header desktop"
               media="(min-width: 40em)"
             />
             <img src={mobileHeader} alt="Header mobile" />

@@ -171,7 +171,7 @@ const RightBtnWrapper = styled(JobTimeList)`
             <FeaturedBtn $featured = {featured}>FEATURED</FeaturedBtn>
           </JobStatusWrapper>
         </CompanyStatusWrapper>
-        <CompanyImage as="img" src={logo} />
+        <CompanyImage as="img" src={logo} alt={company}/>
         <PositionText>{position}</PositionText>
         <JobTimeList>
           <li style={{listStyleType: "none"}}>{postedAt}</li>
