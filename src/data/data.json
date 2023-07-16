@@ -4,7 +4,7 @@
   {
     "id": 1,
     "company": "Photosnap",
-    "logo": "/assets/photosnap.svg",
+    "logo": "/FEM_job_filter/assets/photosnap.svg",
     "new": true,
     "featured": true,
     "position": "Senior Frontend Developer",
@@ -19,7 +19,7 @@
   {
     "id": 2,
     "company": "Manage",
-    "logo": "/assets/manage.svg",
+    "logo": "/FEM_job_filter/assets/manage.svg",
     "new": true,
     "featured": true,
     "position": "Fullstack Developer",
@@ -34,7 +34,7 @@
   {
     "id": 3,
     "company": "Account",
-    "logo": "/assets/account.svg",
+    "logo": "/FEM_job_filter/assets/account.svg",
     "new": true,
     "featured": false,
     "position": "Junior Frontend Developer",
@@ -49,7 +49,7 @@
   {
     "id": 4,
     "company": "MyHome",
-    "logo": "/assets/myhome.svg",
+    "logo": "/FEM_job_filter/assets/myhome.svg",
     "new": false,
     "featured": false,
     "position": "Junior Frontend Developer",
@@ -64,7 +64,7 @@
   {
     "id": 5,
     "company": "Loop Studios",
-    "logo": "/assets/loop-studios.svg",
+    "logo": "/FEM_job_filter/assets/loop-studios.svg",
     "new": false,
     "featured": false,
     "position": "Software Engineer",
@@ -79,7 +79,7 @@
   {
     "id": 6,
     "company": "FaceIt",
-    "logo": "/assets/faceit.svg",
+    "logo": "/FEM_job_filter/assets/faceit.svg",
     "new": false,
     "featured": false,
     "position": "Junior Backend Developer",
@@ -94,7 +94,7 @@
   {
     "id": 7,
     "company": "Shortly",
-    "logo": "/assets/shortly.svg",
+    "logo": "/FEM_job_filter/assets/shortly.svg",
     "new": false,
     "featured": false,
     "position": "Junior Developer",
@@ -109,7 +109,7 @@
   {
     "id": 8,
     "company": "Insure",
-    "logo": "/assets/insure.svg",
+    "logo": "/FEM_job_filter/assets/insure.svg",
     "new": false,
     "featured": false,
     "position": "Junior Frontend Developer",
@@ -124,7 +124,7 @@
   {
     "id": 9,
     "company": "Eyecam Co.",
-    "logo": "/assets/eyecam-co.svg",
+    "logo": "/FEM_job_filter/assets/eyecam-co.svg",
     "new": false,
     "featured": false,
     "position": "Full Stack Engineer",
@@ -139,7 +139,7 @@
   {
     "id": 10,
     "company": "The Air Filter Company",
-    "logo": "/assets/the-air-filter-company.svg",
+    "logo": "/FEM_job_filter/assets/the-air-filter-company.svg",
     "new": false,
     "featured": false,
     "position": "Front-end Dev",
