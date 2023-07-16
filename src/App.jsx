@@ -4,8 +4,8 @@ import './App.css'
 import JobsListing from './components/JobsListing';
 import FilterTab from './components/FilterTab';
 
-import desktopHeader from "./assets/bg-header-desktop.svg";
-import mobileHeader from "./assets/bg-header-mobile.svg";
+import desktopHeader from "/assets/bg-header-desktop.svg";
+import mobileHeader from "/assets/bg-header-mobile.svg";
 
 
 
